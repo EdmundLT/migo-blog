@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
 function StudioNavbar(props: any) {
   return (
@@ -8,7 +8,6 @@ function StudioNavbar(props: any) {
             <ArrowUturnLeftIcon className="h-6 w-6 mr-2"/> Go To Website
         </Link>
       </div>
-
       <>{props.renderDefault(props)}</>
     </div>
   );
