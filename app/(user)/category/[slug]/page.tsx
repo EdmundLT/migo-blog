@@ -34,7 +34,7 @@ export default async function Category({params: {slug}}:Props) {
   const post_to_render :any = []
   posts_res.forEach((post: Post) => {
     post.categories.forEach(category => {
-      if (category.title === slug) {
+      if (category.description === slug) {
         post_to_render.push(post)
       }
     });
