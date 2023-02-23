@@ -21,6 +21,10 @@ export default function Banner() {
       title: "做嘢",
       slug: "Working",
     },
+    {
+      title: "讀書",
+      slug: "Study",
+    },
   ];
 
   return (
