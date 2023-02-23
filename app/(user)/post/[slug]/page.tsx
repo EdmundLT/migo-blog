@@ -39,7 +39,7 @@ async function Post({ params: { slug } }: Props) {
   const post: Post = await client.fetch(query, { slug });
   return (
     <article className="px-10 pb-20">
-      <section className="space-y-2 border text-white">
+      <section className="space-y-2 border text-black">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
           <div className="absolute top-0 w-full h-full opacity-10 blur-sm p-10">
             <Image
@@ -49,13 +49,13 @@ async function Post({ params: { slug } }: Props) {
               fill
             />
           </div>
-          <section className="p-5 bg-[#4582e3] w-full">
+          <section className="p-5 bg-[#7DB9B6] w-full">
             <div className="flex flex-col md:flex-row justify-between gap-y-5">
-              <h1 className="text-4xl font-extrabold">{post.title}</h1>
+              <h1 className="text-3xl font-extrabold">{post.title}</h1>
               <p>
                 {new Date(post._createdAt).toLocaleDateString("en-US", {
                   day: "numeric",
-                  month: "long",
+                  month: "short",
                   year: "numeric",
                 })}
               </p>
@@ -75,7 +75,7 @@ async function Post({ params: { slug } }: Props) {
             </div>
 
             <div>
-              <h2 className="italic pt-10">{post.description}</h2>
+              <h1 className="pt-10">{post.description}</h1>
               <div className="flex items-center justify-end space-x-2">
                 {post.categories.map((category) => (
                   <p

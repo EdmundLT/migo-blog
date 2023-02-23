@@ -26,7 +26,7 @@ function BlogList({ posts }: Props) {
             bg-opacity-20 bg-black backdrop-blur-lg rounded drop-shadow-lg text-white p-4 justify-between"
                 >
                   <div>
-                    <p className="font-bold text-sm">{post.title}</p>
+                    <p className="font-bold text-sm font-ntsc">{post.title}</p>
                     <p>
                       {new Date(post._createdAt).toLocaleDateString("en-US", {
                         day: "numeric",

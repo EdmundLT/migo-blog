@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ValueError } from "sanity";
 import urlFor from "../lib/urlFor";
 
 export const RichTextComponent = {
@@ -31,13 +30,13 @@ export const RichTextComponent = {
       <h1 className=" text-5xl py-10 font-bold">{children}</h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className=" text-5xl py-10 font-bold">{children}</h2>
+      <h2 className=" text-4xl py-10 font-bold">{children}</h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className=" text-5xl py-10 font-bold">{children}</h3>
+      <h3 className=" text-3xl py-10 font-bold">{children}</h3>
     ),
     h4: ({ children }: any) => (
-      <h4 className=" text-5xl py-10 font-bold">{children}</h4>
+      <h4 className=" text-2xl py-10 font-bold">{children}</h4>
     ),
     blockquote: ({ children }: any) => (
       <blockquote className=" border-l-[#4582e3] border-l-4 pl-5 py-5 my-5">
@@ -55,8 +54,9 @@ export const RichTextComponent = {
             <Link
             href={value.href}
             rel={rel}
-            className="underline decoration-[#4582e3] hover:decoration-black"
-            />
+            className="underline decoration-[#4582e3] hover:decoration-black">
+              {children}
+            </Link>
         )
     }
   }
