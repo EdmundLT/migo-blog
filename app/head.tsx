@@ -3,22 +3,36 @@ import Script from "next/script";
 export default function Head() {
   return (
     <>
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-SDZ36SQJWN"
-      ></Script>
-      <Script id="google-analytics" strategy="afterInteractive">
+      {/* <!-- Google Tag Manager --> */}
+      <Script>
+        {" "}
         {`
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SDZ36SQJWN');
-  `}
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NF3RTWK');`}
       </Script>
+      {/* <!-- End Google Tag Manager --> */}
+
       <title>MigoNotes</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="/favicon.ico" />
     </>
   );
 }
+
+
+{/* <Script
+async
+src="https://www.googletagmanager.com/gtag/js?id=G-SDZ36SQJWN"
+></Script>
+<Script id="google-analytics" strategy="afterInteractive">
+{`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-SDZ36SQJWN');
+`}
+</Script> */}
