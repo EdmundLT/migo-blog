@@ -14,6 +14,7 @@ interface Post extends Base {
   slug: Slug;
   title: string;
   description: string;
+  qa: QuestionAndAnswer[];
 }
 
 interface Author extends Base {
@@ -64,4 +65,9 @@ interface MainImage {
 interface Title {
   _type: "string";
   current: string;
+}
+
+interface QuestionAndAnswer extends Base{
+  question: string;
+  answer: string;
 }
