@@ -40,7 +40,7 @@ function BlogList({ posts }: Props) {
                     {post.categories.map((category) => (
                       <div
                         key={category._id}
-                        className="bg-[#BFEAF5] text-center text-black px-6 py-1 rounded-full text-sm font-semibold"
+                        className="bg-green-500 text-center text-black px-6 py-1 rounded-full text-sm font-semibold"
                       >
                         <p>{category.title}</p>
                       </div>
@@ -48,11 +48,11 @@ function BlogList({ posts }: Props) {
                   </div>
                 </div>
               </div>
-              <div className="mt-5 flex-1">
+              <div className="mt-5 flex-1 text-neutral">
                 <p className="underline text-lg font-bold">{post.title}</p>
                 <p className="text-gray-500 line-clamp-2">{post.description}</p>
               </div>
-              <p className="mt-5 font-bold flex items-center group-hover:underline">
+              <p className="text-neutral mt-5 font-bold flex items-center group-hover:underline">
                 {" "}
                 Read Post
                 <ArrowUpRightIcon className="ml-2 h-4 w-4" />
