@@ -12,7 +12,7 @@ export default function RootLayout({
       <body className="max-w-7xl mx-auto bg-white">
         <noscript
           dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXX"
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NF3RTWK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           }}
         ></noscript>
