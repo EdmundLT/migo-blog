@@ -51,7 +51,7 @@ async function Post({ params: { slug } }: Props) {
           </div>
           <section className="p-5 bg-[#7DB9B6] w-full">
             <div className="flex flex-col md:flex-row justify-between gap-y-5">
-              <h1 className="text-3xl font-extrabold">{post.title}</h1>
+              <h1 className="text-3xl font-light">{post.title}</h1>
               <p>
                 {new Date(post._createdAt).toLocaleDateString("en-US", {
                   day: "numeric",
@@ -60,17 +60,16 @@ async function Post({ params: { slug } }: Props) {
                 })}
               </p>
             </div>
+
             <div className="flex item-center space-x-2 pt-4">
-              <Image
-                className="rounded-full"
-                src={urlFor(post.author.image).url()}
-                alt={post.author.name}
-                height={40}
-                width={40}
-              />
+              <div className="avatar placeholder">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+                  <span>ET</span>
+                </div>
+              </div>
               {/* Author Name */}
               <div className="w-64">
-                <h3 className="text-lg font-bold pt-1">{post.author.name}</h3>
+                <h3 className="text-md font-light pt-3">{post.author.name}</h3>
               </div>
             </div>
 

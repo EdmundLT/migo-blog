@@ -30,16 +30,12 @@ export default function Banner() {
   return (
     <div
       className="flex flex-col lg:flex-row lg:space-x-5 justify-between font-bold px-10 py-5
-   mb-10"
+   mb-10 text-base-200"
     >
       <div>
-        <h1 className="text-7xl">Migo Notes</h1>
-        <h2 className="mt-5 md:mt-0">
-          Welcome to{" "}
-          <span className="underline decoration-4 decoration-[#0a65f7]">
-            Migo's blog
-          </span>{" "}
-          Everything about <span className=" text-[#eb2d37]">Canada</span>
+        <h1 className="text-5xl font-light">Otto Notes</h1>
+        <h2 className="mt-5 md:mt-0 pt-2" >
+          加拿大生活大小事
         </h2>
       </div>
       <div className="flex space-x-4">

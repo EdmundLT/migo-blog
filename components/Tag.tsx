@@ -2,7 +2,7 @@ import ClientSideRoute from "./ClientSideRoute";
 
 const Tag = ({ category, slug }: any) => {
   return (
-    <div>
+    <div className="text-green-700 hover:text-green-500">
       <ClientSideRoute route={`/category/${slug}`}>
         <p className="">{category}</p>
       </ClientSideRoute>
