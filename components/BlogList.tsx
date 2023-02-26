@@ -8,6 +8,7 @@ type Props = {
 function BlogList({ posts }: Props) {
   return (
     <div>
+
       <div className="divider">Blog</div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16">
@@ -27,7 +28,7 @@ function BlogList({ posts }: Props) {
             bg-opacity-20 bg-black backdrop-blur-lg rounded drop-shadow-lg text-white p-4 justify-between"
                 >
                   <div>
-                    <p className="font-bold text-sm font-ntsc">{post.title}</p>
+                    <p className="font-bold text-sm font-ntsc w-full">{post.title}</p>
                     <p>
                       {new Date(post._createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
@@ -39,12 +40,13 @@ function BlogList({ posts }: Props) {
 
                   <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
                     {post.categories.map((category) => (
-                      <div
-                        key={category._id}
-                        className="bg-green-500 text-center text-black px-6 py-1 rounded-full text-sm font-semibold"
-                      >
-                        <p>{category.title}</p>
-                      </div>
+                      <div key={category._id} className="badge badge-lg badge-accent"><p className="text-xs">{category.title}</p></div>
+                      // <div
+                      //   key={category._id}
+                      //   className="bg-green-500 text-center text-black px-6 py-1 rounded-full text-sm font-semibold"
+                      // >
+                      //   <p>{category.title}</p>
+                      // </div>
                     ))}
                   </div>
                 </div>
