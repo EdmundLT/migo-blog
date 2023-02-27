@@ -39,7 +39,6 @@ async function Post({ params: { slug } }: Props) {
     `;
   slug = decodeURIComponent(slug);
   const post: Post = await client.fetch(query, { slug });
-  console.log(post);
   return (
     <div className="px-10 pb-20">
       <Head>
@@ -54,9 +53,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         ></Script>
       </Head>
-      <section className="space-y-2 border text-black">
+      <section className="space-y-2 border text-white">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
-          <div className="absolute top-0 w-full h-full opacity-10 blur-sm p-10">
+          <div className="absolute top-0 w-full h-full opacity-30 blur-sm p-10">
             <Image
               className="object-cover obejct-center mx-auto"
               src={urlFor(post.mainImage).url()}
@@ -64,32 +63,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               fill
             />
           </div>
-          <section className="p-5 bg-[#7DB9B6] w-full">
-            <div className="flex flex-col md:flex-row justify-between gap-y-5">
-              <h1 className="text-3xl font-light">{post.title}</h1>
-              <p>
-                {new Date(post._createdAt).toLocaleDateString("en-US", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </p>
-            </div>
-
-            <div className="flex item-center space-x-2 pt-4">
-              <div className="avatar placeholder">
-                <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                  <span>ET</span>
-                </div>
-              </div>
-              {/* Author Name */}
-              <div className="w-64">
-                <h3 className="text-md font-light pt-3">{post.author.name}</h3>
-              </div>
-            </div>
-
+          <section className="p-5 pb-10 bg-black w-full">
             <div>
-              <h1 className="pt-10">{post.description}</h1>
+              {/* <h1 className="pt-10">{post.description}</h1> */}
               <div className="flex items-center justify-end space-x-2">
                 {post.categories.map((category) => (
                   <p
@@ -101,6 +77,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   </p>
                 ))}
               </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between gap-y-5 pt-10">
+              <h1 className="text-2xl font-light md:text-3xl">{post.title}</h1>
+              {/* <p>
+                {new Date(post._createdAt).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p> */}
             </div>
           </section>
         </div>

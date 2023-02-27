@@ -42,6 +42,7 @@ export default async function Head({ params }: { params: { slug: string } }) {
   return (
     <head>
       <title>{post.title}</title>
+      <meta name="description" content={post.description}></meta>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: generateQaStructuredData() }}
