@@ -34,7 +34,7 @@ const posts: Post[] = await client.fetch(query);
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://otto-note.com</loc>
+       <loc>https://otto-notes.com</loc>
      </url>
      ${posts
        .map(({ slug }) => {
