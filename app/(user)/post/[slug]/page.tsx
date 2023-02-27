@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import { groq } from "next-sanity";
 import Head from "next/head";
 import Image from "next/image";
+import Script from "next/script";
 import React from "react";
 import { RichTextComponent } from "../../../../components/RichTextComponent";
 import { client } from "../../../../lib/sanity.client";
@@ -12,7 +13,7 @@ type Props = {
   };
 };
 
-export const revalidate = 30;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const query = groq`
@@ -39,9 +40,18 @@ async function Post({ params: { slug } }: Props) {
 
   const post: Post = await client.fetch(query, { slug });
   return (
-    
     <div className="px-10 pb-20">
       <Head>
+        <Script
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NF3RTWK');`,
+          }}
+        ></Script>
         <title>asd</title>
       </Head>
       <section className="space-y-2 border text-black">
