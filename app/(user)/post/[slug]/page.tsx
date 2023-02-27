@@ -53,11 +53,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         ></Script>
       </Head>
-      <section className="space-y-2 border text-white">
+      <section className="space-y-3">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
-          <div className="absolute top-0 w-full h-full opacity-30 blur-sm p-10">
+          <div className="absolute top-0 w-full h-full opacity-50 p-10 z-0 rounded-sm">
             <Image
-              className="object-cover obejct-center mx-auto"
+              className="object-cover object-center mx-auto"
               src={urlFor(post.mainImage).url()}
               alt={post.author.name}
               fill
@@ -70,7 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 {post.categories.map((category) => (
                   <p
                     key={category._id}
-                    className=" bg-gray-800 text-white px-3 py-1 
+                    className="z-10 bg-gray-800 text-white px-3 py-1 
                         rounded-full text-sm font-semibold mt-4"
                   >
                     {category.title}
@@ -79,7 +79,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-between gap-y-5 pt-10">
-              <h1 className="text-2xl font-light md:text-3xl">{post.title}</h1>
+              <h1 className="text-2xl md:text-3xl text-white z-10">
+                {post.title}
+              </h1>
               {/* <p>
                 {new Date(post._createdAt).toLocaleDateString("en-US", {
                   day: "numeric",
@@ -91,7 +93,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </section>
         </div>
       </section>
-      <PortableText value={post.body} components={RichTextComponent} />
+      <div className="py-2">
+        <PortableText value={post.body} components={RichTextComponent} />
+      </div>
     </div>
   );
 }
