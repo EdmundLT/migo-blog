@@ -14,7 +14,7 @@ const query = groq`
 
 export const revalidate = 30;
 export default async function HomePage() {
-  if (!previewData()) {
+  if (previewData()) {
     return (
       <PreviewSuspense
         fallback={
