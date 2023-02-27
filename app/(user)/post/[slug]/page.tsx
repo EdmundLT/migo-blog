@@ -37,8 +37,9 @@ async function Post({ params: { slug } }: Props) {
         categories[]->
      }
     `;
-
+  slug = decodeURIComponent(slug);
   const post: Post = await client.fetch(query, { slug });
+  console.log(post);
   return (
     <div className="px-10 pb-20">
       <Head>
@@ -52,7 +53,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NF3RTWK');`,
           }}
         ></Script>
-        <title>asd</title>
       </Head>
       <section className="space-y-2 border text-black">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
