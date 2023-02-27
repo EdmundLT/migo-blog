@@ -15,7 +15,8 @@ async function getPost(slug: string) {
 }
 
 export default async function Head({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+  const encodedSlug = decodeURIComponent(params.slug);
+  const post = await getPost(encodedSlug);
   const generateQaStructuredData = () => {
     if (post.qa) {
 

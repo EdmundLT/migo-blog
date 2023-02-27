@@ -14,21 +14,21 @@ const query = groq`
 
 export const revalidate = 30;
 export default async function HomePage() {
-  if (previewData()) {
-    return (
-      <PreviewSuspense
-        fallback={
-          <div role="status">
-            <p className="text-center text-lg animate-pulse text-[#0a65f7]">
-              Loading Preview Data...
-            </p>
-          </div>
-        }
-      >
-        <PreviewBlogList query={query} />
-      </PreviewSuspense>
-    );
-  } else {
+  // if (previewData()) {
+  //   return (
+  //     <PreviewSuspense
+  //       fallback={
+  //         <div role="status">
+  //           <p className="text-center text-lg animate-pulse text-[#0a65f7]">
+  //             Loading Preview Data...
+  //           </p>
+  //         </div>
+  //       }
+  //     >
+  //       <PreviewBlogList query={query} />
+  //     </PreviewSuspense>
+  //   );
+  // } else {
     const posts = await client.fetch(query);
     return (
       <div>
@@ -36,4 +36,4 @@ export default async function HomePage() {
       </div>
     );
   }
-}
+// }
