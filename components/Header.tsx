@@ -17,7 +17,6 @@ function Header() {
         <h1 className="pt-3 pl-1">Otto Notes</h1>
         </Link>
       </div>
-      <div></div>
       
     </header>
   );
