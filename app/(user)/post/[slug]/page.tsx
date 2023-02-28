@@ -7,6 +7,7 @@ import React from "react";
 import { RichTextComponent } from "../../../../components/RichTextComponent";
 import { client } from "../../../../lib/sanity.client";
 import urlFor from "../../../../lib/urlFor";
+
 type Props = {
   params: {
     slug: string;
@@ -28,7 +29,7 @@ export async function generateStaticParams() {
     slug,
   }));
 }
-async function Post({ params: { slug } }: Props) {
+async function Post({ params }: Props) {
   const query = groq`
      *[_type=='post' && slug.current == $slug][0]
      {
@@ -37,8 +38,8 @@ async function Post({ params: { slug } }: Props) {
         categories[]->
      }
     `;
-  slug = decodeURIComponent(slug);
-  const post: Post = await client.fetch(query, { slug });
+  params.slug = decodeURIComponent(params.slug);
+  const post: Post = await client.fetch(query,  {slug: params.slug} );
   return (
     <div className="px-10 pb-20">
       <Head>
@@ -70,8 +71,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 {post.categories.map((category) => (
                   <p
                     key={category._id}
-                    className="z-10 bg-gray-800 text-white px-3 py-1 
-                        rounded-full text-sm font-semibold mt-4"
+                    className="z-10 badge badge-lg badge-accent text-white px-3 py-1 
+                        rounded-full text-sm font-semibold mt-4 "
                   >
                     {category.title}
                   </p>
