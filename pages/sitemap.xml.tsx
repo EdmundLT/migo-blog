@@ -2,7 +2,6 @@ import { GetServerSideProps } from "next";
 import { groq } from "next-sanity";
 import { client } from "../lib/sanity.client";
 
-
 export const getServerSideProps: GetServerSideProps<{}> = async (ctx) => {
   const xml = await generateSiteMap();
   console.log(xml);
@@ -17,7 +16,6 @@ export default function Sitemap() {
   return null;
 }
 
-
 async function generateSiteMap() {
   const query = groq`
   *[_type=='post']
@@ -28,7 +26,7 @@ async function generateSiteMap() {
  }
   `;
 
-const posts: Post[] = await client.fetch(query);
+  const posts: Post[] = await client.fetch(query);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -36,6 +34,18 @@ const posts: Post[] = await client.fetch(query);
      <url>
        <loc>https://otto-notes.com</loc>
      </url>
+     <url>
+     <loc>https://otto-notes.com/category/immigrant</loc>
+ </url>
+ <url>
+ <loc>https://otto-notes.com/category/Life</loc>
+</url>
+<url>
+<loc>https://otto-notes.com/category/Working</loc>
+</url>
+<url>
+<loc>https://otto-notes.com/category/Study</loc>
+</url>
      ${posts
        .map(({ slug }) => {
          return `
@@ -44,7 +54,7 @@ const posts: Post[] = await client.fetch(query);
        </url>
      `;
        })
-       .join('')}
+       .join("")}
    </urlset>
  `;
 }
