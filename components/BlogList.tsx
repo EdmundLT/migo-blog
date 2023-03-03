@@ -38,7 +38,7 @@ function BlogList({ posts }: Props) {
                       key={category._id}
                       className="badge badge-lg badge-accent"
                     >
-                      <p className="text-sm">{category.title}</p>
+                      <p className="text-sm text-white">{category.title}</p>
                     </div>
                   ))}
                 </div>
