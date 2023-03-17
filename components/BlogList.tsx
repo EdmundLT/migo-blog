@@ -27,6 +27,7 @@ function BlogList({ posts }: Props) {
                   ))}
                 </div>
                 <Image
+                  priority={true}
                   className="object-cover object-left lg:object-center"
                   src={urlFor(post.mainImage).url()}
                   alt={post.author.name}
