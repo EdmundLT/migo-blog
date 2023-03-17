@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang="zh-Hant">
       <body className="max-w-full mx-auto bg-white py-4">
         <noscript
           dangerouslySetInnerHTML={{
