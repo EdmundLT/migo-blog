@@ -11,19 +11,19 @@ export default function Banner() {
   const categories: category[] = [
     {
       title: "移民",
-      slug: "Immigrant",
+      slug: "immigrant",
     },
     {
       title: "生活",
-      slug: "Life",
+      slug: "life",
     },
     {
       title: "工作",
-      slug: "Working",
+      slug: "working",
     },
     {
       title: "讀書",
-      slug: "Study",
+      slug: "study",
     },
   ];
 
