@@ -42,6 +42,7 @@ export default async function Head({ params }: { params: { slug: string } }) {
   };
   return (
     <head>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2632815382162562" crossOrigin="anonymous"></script>
       <title>{post.title}</title>
       <Script
         strategy="afterInteractive"
