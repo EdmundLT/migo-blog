@@ -10,12 +10,7 @@ function BlogList({ posts }: Props) {
   return (
     <div>
       <div className="divider">Blog</div>
-      <AdBanner
-        data-ad-slot="2371262216"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 ">
         {/* Posts */}
         {posts.map((post) => (
           <ClientSideRoute route={`/post/${post.slug.current}`}>
