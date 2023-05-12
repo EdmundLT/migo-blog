@@ -14,10 +14,9 @@ function Header() {
             src={logo_png}
             alt=""
           />
-        <h1 className="pt-3 pl-1">Otto Notes</h1>
+          <h1 className="pt-3 pl-1">Otto Notes</h1>
         </Link>
       </div>
-      
     </header>
   );
 }

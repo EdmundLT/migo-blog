@@ -1,6 +1,7 @@
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import urlFor from "../lib/urlFor";
+import AdBanner from "./AdBanner";
 import ClientSideRoute from "./ClientSideRoute";
 type Props = {
   posts: Post[];
@@ -9,7 +10,11 @@ function BlogList({ posts }: Props) {
   return (
     <div>
       <div className="divider">Blog</div>
-
+      <AdBanner
+        data-ad-slot="2371262216"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16">
         {/* Posts */}
         {posts.map((post) => (
