@@ -16,13 +16,12 @@ export default function RootLayout({
 height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           }}
         ></noscript>
-        <main className="max-w-7xl mx-auto">
+        <main className="max-w-5xl mx-auto">
         <Banner />
         {children}
         </main>
       </body>
         <Footer />
-
     </html>
   );
 }
