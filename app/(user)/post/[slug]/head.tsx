@@ -20,7 +20,6 @@ export default async function Head({ params }: { params: { slug: string } }) {
   const post = await getPost(encodedSlug);
   const generateQaStructuredData = () => {
     if (post.qa) {
-
       return JSON.stringify({
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -35,14 +34,17 @@ export default async function Head({ params }: { params: { slug: string } }) {
           };
         }),
       });
-    }
-    else {
-      return ""
+    } else {
+      return "";
     }
   };
   return (
     <head>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2632815382162562" crossOrigin="anonymous"></script>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2632815382162562"
+        crossOrigin="anonymous"
+      />
       <title>{post.title}</title>
       <Script
         strategy="afterInteractive"
