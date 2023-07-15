@@ -42,6 +42,12 @@ async function Post({ params }: Props) {
   const post: Post = await client.fetch(query, { slug: params.slug });
   return (
     <div className="px-10 pb-20">
+      <script
+        async={true}
+        data-cfasync="false"
+        src="//pl20051489.highwaycpmrevenue.com/23cf48b743f31cfc3cdf00d563bcafd4/invoke.js"
+      ></script>
+      <div id="container-23cf48b743f31cfc3cdf00d563bcafd4"></div>
       <section className="space-y-3">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
           <div className="absolute top-0 w-full h-full opacity-50 p-10 z-0 rounded-sm">

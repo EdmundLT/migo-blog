@@ -61,6 +61,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: generateQaStructuredData() }}
       ></script>
+      <script
+        async={true}
+        data-cfasync="false"
+        src="//pl20051489.highwaycpmrevenue.com/23cf48b743f31cfc3cdf00d563bcafd4/invoke.js"
+      ></script>
     </head>
   );
 }
