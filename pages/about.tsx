@@ -2,7 +2,6 @@ import React from "react";
 import Banner from "../components/Banner";
 import "styles/globals.css";
 import Footer from "../components/Footer";
-import Image from "next/image";
 const about = () => {
   return (
     <div className="max-w-full mx-auto bg-white">
@@ -11,7 +10,7 @@ const about = () => {
 
         <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
           <div className="flex flex-col lg:flex-row justify-between gap-8">
-            <div className="w-full lg:w-5/12 flex flex-col justify-center">
+            <div className="w-full flex flex-col justify-center">
               <h1 className="text-2xl lg:text-3xl leading-9 text-gray-800 dark:text-black pb-4">
                 關於我們
               </h1>
@@ -19,15 +18,6 @@ const about = () => {
                 這個 Blog
                 主要記載我們在加拿大的生活、工作、唸書以及分享一些職場資訊。我們希望透過文字來紀錄這個移民的過程，讓有需要的朋友可以參考。
               </p>
-            </div>
-            <div className="w-full lg:w-8/12">
-              <Image
-                className="rounded-lg shadow-lg"
-                width={640}
-                height={150}
-                src="/images/otto.webp"
-                alt="Otto"
-              />
             </div>
           </div>
 

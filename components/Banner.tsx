@@ -1,5 +1,4 @@
 "use client";
-
 import Tag from "./Tag";
 
 interface category {
@@ -8,6 +7,7 @@ interface category {
 }
 
 export default function Banner() {
+  
   const categories: category[] = [
     {
       title: "移民",
@@ -34,10 +34,8 @@ export default function Banner() {
     >
       <a href="/" className="select-none">
         <h1 className="text-5xl font-light">Otto Notes</h1>
-        <h2 className="mt-5 md:mt-0 pt-2" >
-          加拿大生活大小事
-        </h2>
-      </a> 
+        <h2 className="mt-5 md:mt-0 pt-2">加拿大生活大小事</h2>
+      </a>
       <div className="flex space-x-4 pt-4">
         {categories.map((cat: category) => {
           return (
