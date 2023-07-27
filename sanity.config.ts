@@ -10,8 +10,8 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
 export default defineConfig({
   basePath: "/studio",
-  name: 'MIGONOTE_STUDIO',
-  title: 'migonotes',
+  name: 'OTTOS-NOTE_STUDIO',
+  title: 'Otto notes',
   projectId,
   dataset,
   plugins: [deskTool({

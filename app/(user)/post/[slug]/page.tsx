@@ -1,17 +1,20 @@
 import { PortableText } from "@portabletext/react";
 import { groq } from "next-sanity";
+import Head from "next/head";
 import Image from "next/image";
+import Script from "next/script";
 import React from "react";
 import { RichTextComponent } from "../../../../components/RichTextComponent";
 import { client } from "../../../../lib/sanity.client";
 import urlFor from "../../../../lib/urlFor";
+
 type Props = {
   params: {
     slug: string;
   };
 };
 
-export const revalidate = 30;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const query = groq`
@@ -26,7 +29,7 @@ export async function generateStaticParams() {
     slug,
   }));
 }
-async function Post({ params: { slug } }: Props) {
+async function Post({ params }: Props) {
   const query = groq`
      *[_type=='post' && slug.current == $slug][0]
      {
@@ -35,64 +38,55 @@ async function Post({ params: { slug } }: Props) {
         categories[]->
      }
     `;
-
-  const post: Post = await client.fetch(query, { slug });
+  params.slug = decodeURIComponent(params.slug);
+  const post: Post = await client.fetch(query, { slug: params.slug });
   return (
-    <article className="px-10 pb-20">
-      <section className="space-y-2 border text-black">
+    <div className="px-10 pb-20">
+      <section className="space-y-3">
         <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
-          <div className="absolute top-0 w-full h-full opacity-10 blur-sm p-10">
+          <div className="absolute top-0 w-full h-full opacity-50 p-10 z-0 rounded-sm">
             <Image
-              className="object-cover obejct-center mx-auto"
+              priority={true}
+              className="object-cover object-center mx-auto"
               src={urlFor(post.mainImage).url()}
               alt={post.author.name}
               fill
             />
           </div>
-          <section className="p-5 bg-[#7DB9B6] w-full">
-            <div className="flex flex-col md:flex-row justify-between gap-y-5">
-              <h1 className="text-3xl font-extrabold">{post.title}</h1>
-              <p>
-                {new Date(post._createdAt).toLocaleDateString("en-US", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </p>
-            </div>
-            <div className="flex item-center space-x-2 pt-4">
-              <Image
-                className="rounded-full"
-                src={urlFor(post.author.image).url()}
-                alt={post.author.name}
-                height={40}
-                width={40}
-              />
-              {/* Author Name */}
-              <div className="w-64">
-                <h3 className="text-lg font-bold pt-1">{post.author.name}</h3>
-              </div>
-            </div>
-
+          <section className="p-5 pb-10 bg-black w-full">
             <div>
-              <h1 className="pt-10">{post.description}</h1>
+              {/* <h1 className="pt-10">{post.description}</h1> */}
               <div className="flex items-center justify-end space-x-2">
                 {post.categories.map((category) => (
                   <p
                     key={category._id}
-                    className=" bg-gray-800 text-white px-3 py-1 
-                        rounded-full text-sm font-semibold mt-4"
+                    className="z-10 badge badge-lg badge-accent text-white px-3 py-1 
+                        rounded-full text-sm font-semibold mt-4 "
                   >
                     {category.title}
                   </p>
                 ))}
               </div>
             </div>
+            <div className="flex flex-col md:flex-row justify-between gap-y-5 pt-10">
+              <h1 className="text-2xl md:text-3xl text-white z-10">
+                {post.title}
+              </h1>
+              {/* <p>
+                {new Date(post._createdAt).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p> */}
+            </div>
           </section>
         </div>
       </section>
-      <PortableText value={post.body} components={RichTextComponent} />
-    </article>
+      <div className="py-2">
+        <PortableText value={post.body} components={RichTextComponent} />
+      </div>
+    </div>
   );
 }
 

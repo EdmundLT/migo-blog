@@ -16,7 +16,7 @@ const query = groq`
 } | order(_createdAt desc)
 `;
 
-export const revalidate = 30;
+export const revalidate = 60;
 export async function generateStaticParams() {
   const query = groq`
   *[_type=='post']
