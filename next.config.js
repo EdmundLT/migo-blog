@@ -7,11 +7,11 @@ const i18nConfig = require("./i18nConfig");
 module.exports = withOptimizedImages({});
 
 module.exports = {
-  async rewrites() {
-    return {
-      afterFiles: i18nRewriter(i18nConfig),
-    };
-  },
+  // async rewrites() {
+  //   return {
+  //     afterFiles: i18nRewriter(i18nConfig),
+  //   };
+  // },
   async redirects() {
     return [
       {
