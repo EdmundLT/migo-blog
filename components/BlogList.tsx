@@ -1,42 +1,37 @@
+"use client"
+
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import urlFor from "../lib/urlFor";
-import AdBanner from "./AdBanner";
 import ClientSideRoute from "./ClientSideRoute";
-type Props = {
-  posts: Post[];
-};
-function BlogList({ posts }: Props) {
+function BlogList({ posts }) {
   return (
-    <div>
+    <>
       <div className="divider">Blog</div>
       <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 ">
         {/* Posts */}
         {posts.map((post) => (
-          <ClientSideRoute route={`/post/${post.slug.current}`}>
-            <div key={post._id} className="flex flex-col group cursor-pointer">
+          <a href={"/post/"+ post.slug} key={post.slug}>
+            <div  className="flex flex-col group cursor-pointer">
               <div className="relative w-full h-80 drop-shadow-xl group-hover:scale-105 transition-transform duration-200 ease-out">
                 <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
-                  {post.categories.map((category) => (
+                  {post.categories.map((category, idx) => (
                     <div
-                      key={category._id}
+                      key={idx}
                       className="badge badge-lg badge-accent"
                     >
-                      <p className="text-xs">{category.title}</p>
+                      <p className="text-xs text-black">{category.category}</p>
                     </div>
                   ))}
                 </div>
-                <Image
-                  priority={true}
+                <img
                   className="object-cover object-left lg:object-center"
-                  src={urlFor(post.mainImage).url()}
-                  alt={post.author.name}
-                  fill
+                  src={post.mainImage.url}
+                  alt={post.mainImage.url}
                 />
                 <div className="flex absolute top-0 right-0 p-4 flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
                   {post.categories.map((category) => (
                     <div
-                      key={category._id}
+                      key={category}
                       className="badge badge-lg badge-accent"
                     >
                       <p className="text-sm text-white">{category.title}</p>
@@ -72,10 +67,10 @@ function BlogList({ posts }: Props) {
                 <ArrowUpRightIcon className="ml-2 h-4 w-4" />
               </p>
             </div>
-          </ClientSideRoute>
+          </a>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

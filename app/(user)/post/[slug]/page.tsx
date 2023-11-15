@@ -1,45 +1,133 @@
-import { PortableText } from "@portabletext/react";
-import { groq } from "next-sanity";
-import Head from "next/head";
+"use client";
+import { gql } from "@apollo/client";
 import Image from "next/image";
-import Script from "next/script";
-import React from "react";
-import { RichTextComponent } from "../../../../components/RichTextComponent";
-import { client } from "../../../../lib/sanity.client";
-import urlFor from "../../../../lib/urlFor";
-
+import React, { useEffect, useState } from "react";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { client } from "../../../../lib/client";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Head } from "next/document";
 type Props = {
   params: {
     slug: string;
   };
 };
+type Iqa = {
+  question: string;
+  answer: string;
+};
 
-export const revalidate = 60;
+type IblogPost = {
+  title: string;
+  body: { json: Document | undefined };
+  slug: string;
+  categories: string[];
+  mainImage: {
+    url: string;
+    title: string;
+  };
+  description: string;
+  createdAt: string;
+  qa: Iqa[];
+};
+function Post({ params }: Props) {
+  let jsonLd;
+  const [blogPost, setBlogPost] = useState<IblogPost>({
+    title: "",
+    body: { json: undefined },
+    slug: "",
+    categories: [],
+    mainImage: {
+      url: "",
+      title: "",
+    },
+    description: "",
+    createdAt: "",
+    qa: [],
+  });
+  async function getBlog() {
+    params.slug = decodeURIComponent(params.slug);
+    await client
+      .query({
+        query: gql`
+          query ($preview: Boolean, $slug: String!) {
+            blogsCollection(preview: $preview, where: { slug: $slug }) {
+              items {
+                title
+                body {
+                  json
+                }
+                slug
+                categories
+                mainImage {
+                  url
+                  title
+                }
+                description
+                createdAt
+              }
+            }
+          }
+        `,
+        variables: {
+          slug: params.slug,
+        },
+      })
+      .then((result) => {
+        console.log(result.data.blogsCollection.items[0]);
+        setBlogPost(result.data.blogsCollection.items[0]);
 
-export async function generateStaticParams() {
-  const query = groq`
-  *[_type=='post']
-  {slug}
-  `;
+        jsonLd = {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: blogPost.qa.map(
+            ({ question, answer }: { question: string; answer: string }) => {
+              return {
+                "@type": "Question",
+                name: question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: answer,
+                },
+              };
+            }
+          ),
+        };
+      });
+  }
 
-  const slugs: Post[] = await client.fetch(query);
-  const slugRoutes = slugs.map((slug) => slug.slug.current);
+  useEffect(() => {
+    getBlog();
+  }, []);
+  const Heading1 = ({ children }: any) => (
+    <h1 className="py-2 text-3xl">{children}</h1>
+  );
+  const Heading2 = ({ children }: any) => (
+    <h2 className="py-2 text-2xl">{children}</h2>
+  );
+  const Heading3 = ({ children }: any) => (
+    <h3 className="py-2 text-xl">{children}</h3>
+  );
+  const Text = ({ children }: any) => (
+    <p className="py-2 text-lg">{children}</p>
+  );
 
-  return slugRoutes.map((slug) => ({
-    slug,
-  }));
-}
-async function Post({ params }: Props) {
-  const query = groq`
-     *[_type=='post' && slug.current == $slug][0]
-     {
-        ...,
-        author->,
-        categories[]->
-     }
-    `;
-  params.slug = decodeURIComponent(params.slug);
-  const post: Post = await client.fetch(query, { slug: params.slug });
+  const RichTextoptions = {
+    renderNode: {
+      [BLOCKS.HEADING_1]: (node: any, children: any) => (
+        <Heading1>{children}</Heading1>
+      ),
+      [BLOCKS.HEADING_2]: (node: any, children: any) => (
+        <Heading2>{children}</Heading2>
+      ),
+      [BLOCKS.HEADING_3]: (node: any, children: any) => (
+        <Heading3>{children}</Heading3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node: any, children: any) => <Text>{children}</Text>,
+    },
+
+    renderText: (text: any) => text.replace("!", "?"),
+  };
+
   return (
     <div className="px-10 pb-20">
       <section className="space-y-3">
@@ -48,8 +136,8 @@ async function Post({ params }: Props) {
             <Image
               priority={true}
               className="object-cover object-center mx-auto"
-              src={urlFor(post.mainImage).url()}
-              alt={post.author.name}
+              src={blogPost!.mainImage.url}
+              alt={blogPost!.mainImage.title}
               fill
             />
           </div>
@@ -57,20 +145,20 @@ async function Post({ params }: Props) {
             <div>
               {/* <h1 className="pt-10">{post.description}</h1> */}
               <div className="flex items-center justify-end space-x-2">
-                {post.categories.map((category) => (
+                {blogPost!.categories.map((category) => (
                   <p
-                    key={category._id}
+                    key={category}
                     className="z-10 badge badge-lg badge-accent text-white px-3 py-1 
                         rounded-full text-sm font-semibold mt-4 "
                   >
-                    {category.title}
+                    {category}
                   </p>
                 ))}
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-between gap-y-5 pt-10">
               <h1 className="text-2xl md:text-3xl text-white z-10">
-                {post.title}
+                {blogPost!.title}
               </h1>
               {/* <p>
                 {new Date(post._createdAt).toLocaleDateString("en-US", {
@@ -82,10 +170,12 @@ async function Post({ params }: Props) {
             </div>
           </section>
         </div>
+        <div className="py-2 text-black">
+          {/* <PortableText value={blogPost.body.json} components={RichTextComponent} /> */}
+
+          {documentToReactComponents(blogPost.body.json!, RichTextoptions)}
+        </div>
       </section>
-      <div className="py-2">
-        <PortableText value={post.body} components={RichTextComponent} />
-      </div>
     </div>
   );
 }

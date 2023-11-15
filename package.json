@@ -6,6 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.7",
+    "@apollo/experimental-nextjs-app-support": "^0.5.1",
+    "@contentful/rich-text-react-renderer": "^15.19.0",
     "@heroicons/react": "^2.0.14",
     "@portabletext/react": "^2.0.1",
     "@sanity/block-content-to-react": "^3.0.0",
@@ -13,7 +16,10 @@
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.0.0",
     "@tailwindcss/line-clamp": "0.4.2",
+    "@types/apollo-upload-client": "^17.0.5",
+    "apollo-link-context": "^1.0.20",
     "daisyui": "^2.51.1",
+    "graphql": "^16.8.1",
     "next": "latest",
     "next-optimized-images": "^2.6.2",
     "next-sanity": "^4.1.2",

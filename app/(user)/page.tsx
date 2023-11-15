@@ -1,38 +1,48 @@
-import { previewData } from "next/headers";
-import { groq } from "next-sanity";
-import { client } from "../../lib/sanity.client";
-import PreviewSuspense from "../../components/PreviewSuspense";
-import PreviewBlogList from "../../components/PreviewBlogList";
+"use client"
+import { gql } from "@apollo/client";
+import { useState, useEffect } from "react";
 import BlogList from "../../components/BlogList";
-const query = groq`
-*[_type=='post'] {
-  ...,
-  author->,
-  categories[]->
-} | order(_createdAt desc)
-`;
+import { client } from "../../lib/client";
 
-export const revalidate = 60;
-export default async function HomePage() {
-  // if (previewData()) {
-  //   return (
-  //     <PreviewSuspense
-  //       fallback={
-  //         <div role="status">
-  //           <p className="text-center text-lg animate-pulse text-[#0a65f7]">
-  //             Loading Preview Data...
-  //           </p>
-  //         </div>
-  //       }
-  //     >
-  //       <PreviewBlogList query={query} />
-  //     </PreviewSuspense>
-  //   );
-  // } else {
-    const posts = await client.fetch(query);
+export default function HomePage() {
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  function getPortfolioList() {
+    client
+      .query({
+        query: gql`
+        query ($preview: Boolean){
+          blogsCollection(preview: $preview) {
+            items {
+              title
+              body {
+                json
+              }
+              slug
+              categories
+              mainImage {
+                url
+              }
+              description
+              createdAt
+            }
+          }
+        }
+        `,
+      })
+      .then((result) => {
+        console.log(result.data.blogsCollection.items);
+        setBlogPosts(result.data.blogsCollection.items);
+      });
+  }
+
+  useEffect(() => {
+    getPortfolioList();
+  }, []);
+
     return (
       <div>
-        <BlogList posts={posts} />
+        <BlogList posts={blogPosts} />
       </div>
     );
   }
